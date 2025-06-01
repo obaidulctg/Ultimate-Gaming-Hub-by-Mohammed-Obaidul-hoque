@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Gaming Hub by Mohammed Obaidul hoque</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="header">
+        <h1>🎮 Ultimate Gaming Hub<sub><br>by </sub><a href="https://www.facebook.com/obaidulhoquectg">Mohammed Obaidul Hoque</a></h1>
+        <p>Your ultimate destination for classic arcade games</p>
+    </div>
+
+    <div class="container">
+        <div id="gameSelection" class="game-selection">
+            <div class="game-card" onclick="startGame('snake')">
+                <span class="game-icon">🐍</span>
+                <div class="game-title">Snake Game</div>
+                <div class="game-description">Control the snake to eat food and grow longer without hitting walls or yourself</div>
+            </div>
+
+            <div class="game-card" onclick="startGame('tictactoe')">
+                <span class="game-icon">❌</span>
+                <div class="game-title">Tic Tac Toe</div>
+                <div class="game-description">Classic strategy game - get three in a row to win against your opponent</div>
+            </div>
+
+            <div class="game-card" onclick="startGame('memory')">
+                <span class="game-icon">🧠</span>
+                <div class="game-title">Memory Game</div>
+                <div class="game-description">Test your memory by matching pairs of cards in the fewest moves possible</div>
+            </div>
+
+            <div class="game-card" onclick="startGame('pong')">
+                <span class="game-icon">🏓</span>
+                <div class="game-title">Pong</div>
+                <div class="game-description">Classic arcade game - control the paddle to keep the ball in play</div>
+            </div>
+
+            <div class="game-card" onclick="startGame('tetris')">
+                <span class="game-icon">🧩</span>
+                <div class="game-title">Tetris</div>
+                <div class="game-description">Arrange falling blocks to create complete lines and clear them</div>
+            </div>
+
+            <div class="game-card" onclick="startGame('simon')">
+                <span class="game-icon">🎵</span>
+                <div class="game-title">Simon Says</div>
+                <div class="game-description">Remember and repeat the sequence of colors and sounds to advance</div>
+            </div>
+
+            <div class="game-card" onclick="startGame('rps')">
+                <span class="game-icon">✂️</span>
+                <div class="game-title">Rock Paper Scissors</div>
+                <div class="game-description">The classic hand game - rock crushes scissors, scissors cut paper, paper covers rock</div>
+            </div>
+
+            <div class="game-card" onclick="startGame('hangman')">
+                <span class="game-icon">📝</span>
+                <div class="game-title">Hangman</div>
+                <div class="game-description">Guess the hidden word letter by letter before the drawing is completed</div>
+            </div>
+        </div>
+
+        <!-- Snake Game -->
+        <div id="snakeGame" class="game-area">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+                <h2 class="game-title-header">Snake Game</h2>
+            </div>
+            <div class="snake-game">
+                <div class="score-display">Score: <span id="snakeScore">0</span></div>
+                <canvas id="snakeCanvas" width="400" height="400"></canvas>
+                <div class="pong-controls">Use arrow keys or WASD to control the snake</div>
+            </div>
+        </div>
+
+        <!-- Tic Tac Toe Game -->
+        <div id="tictactoeGame" class="game-area">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+                <h2 class="game-title-header">Tic Tac Toe</h2>
+            </div>
+            <div class="game-info">
+                <div class="info-item">Current Player: <span id="currentPlayer">X</span></div>
+                <button class="btn" onclick="resetTicTacToe()">Reset Game</button>
+            </div>
+            <div class="ttt-board" id="tttBoard"></div>
+            <div id="tttResult" style="font-size: 1.2rem; font-weight: bold; margin-top: 20px; color: #333; text-align: center;"></div>
+        </div>
+
+        <!-- Memory Game -->
+        <div id="memoryGame" class="game-area">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+                <h2 class="game-title-header">Memory Card Game</h2>
+            </div>
+            <div class="game-info">
+                <div class="info-item">Moves: <span id="moves">0</span></div>
+                <div class="info-item">Matches: <span id="matches">0</span>/8</div>
+                <button class="btn" onclick="resetMemory()">Reset Game</button>
+            </div>
+            <div class="memory-board" id="memoryBoard"></div>
+            <div id="memoryResult" style="font-size: 1.2rem; font-weight: bold; margin-top: 20px; color: #333; text-align: center;"></div>
+        </div>
+
+        <!-- Pong Game -->
+        <div id="pongGame" class="game-area">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+                <h2 class="game-title-header">Pong</h2>
+            </div>
+            <div class="pong-game">
+                <div class="score-display">Player: <span id="playerScore">0</span> | Computer: <span id="computerScore">0</span></div>
+                <canvas id="pongCanvas" width="600" height="300"></canvas>
+                <div class="pong-controls">Use UP and DOWN arrow keys to control your paddle</div>
+            </div>
+        </div>
+
+        <!-- Tetris Game -->
+        <div id="tetrisGame" class="game-area">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+                <h2 class="game-title-header">Tetris</h2>
+            </div>
+            <div class="tetris-game">
+                <div class="game-info">
+                    <div class="info-item">Score: <span id="tetrisScore">0</span></div>
+                    <div class="info-item">Lines: <span id="tetrisLines">0</span></div>
+                    <div class="info-item">Level: <span id="tetrisLevel">1</span></div>
+                </div>
+                <canvas id="tetrisCanvas" width="300" height="600"></canvas>
+                <div class="pong-controls">Use arrow keys: ← → to move, ↓ to drop faster, ↑ to rotate</div>
+            </div>
+        </div>
+
+        <!-- Simon Says Game -->
+        <div id="simonGame" class="game-area">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+                <h2 class="game-title-header">Simon Says</h2>
+            </div>
+            <div class="game-info">
+                <div class="info-item">Level: <span id="simonLevel">1</span></div>
+                <div class="info-item">Score: <span id="simonScore">0</span></div>
+                <button class="btn primary" id="simonStart" onclick="startSimon()">Start Game</button>
+            </div>
+            <div class="simon-board" id="simonBoard">
+                <button class="simon-button simon-red" data-color="0"></button>
+                <button class="simon-button simon-blue" data-color="1"></button>
+                <button class="simon-button simon-green" data-color="2"></button>
+                <button class="simon-button simon-yellow" data-color="3"></button>
+            </div>
+            <div id="simonMessage" style="text-align: center; margin-top: 20px; font-size: 1.2rem; color: #333;"></div>
+        </div>
+
+        <!-- Rock Paper Scissors Game -->
+        <div id="rpsGame" class="game-area">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+                <h2 class="game-title-header">Rock Paper Scissors</h2>
+            </div>
+            <div class="rps-game">
+                <div class="game-info">
+                    <div class="info-item">Wins: <span id="playerWins">0</span></div>
+                    <div class="info-item">Losses: <span id="playerLosses">0</span></div>
+                    <div class="info-item">Ties: <span id="playerTies">0</span></div>
+                </div>
+                <div class="rps-choices">
+                    <button class="rps-choice" onclick="playRPS('rock')">🪨</button>
+                    <button class="rps-choice" onclick="playRPS('paper')">📄</button>
+                    <button class="rps-choice" onclick="playRPS('scissors')">✂️</button>
+                </div>
+                <div id="rpsResult" class="rps-result">Choose your weapon!</div>
+            </div>
+        </div>
+
+        <!-- Hangman Game -->
+        <div id="hangmanGame" class="game-area">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">← Back to Menu</button>
+                <h2 class="game-title-header">Hangman</h2>
+            </div>
+            <div class="word-game">
+                <div class="game-info">
+                    <div class="info-item">Wrong Guesses: <span id="wrongGuesses">0</span>/6</div>
+                    <div class="info-item">Score: <span id="hangmanScore">0</span></div>
+                    <button class="btn" onclick="resetHangman()">New Word</button>
+                </div>
+                <div class="hangman-display" id="hangmanDisplay"></div>
+                <div class="word-display" id="wordDisplay"></div>
+                <div class="alphabet-grid" id="alphabetGrid"></div>
+                <div id="hangmanResult" style="text-align: center; margin-top: 20px; font-size: 1.2rem; color: #333;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Mohammed Obadul Hoque - Enjoy classic games reimagined for the modern web</p>
+    </div>
+    <script src="scripts.js"></script>
+        </body>
+        </html>
